@@ -2,7 +2,7 @@
 title: "Math 295: Homework 4"
 subtitle: "Data Import and Tidy Data"
 author: "Be Sure to Put Your Name Here"  
-date: "Due February 16, 2021"
+date: "Due February 16, 2023"
 output: 
   github_document: 
     toc: true
@@ -25,9 +25,9 @@ Use this document as a template for writing up your assignment. As in previous a
 
 # Question 1: Super Bowl Data
 
-Now  it's been a couple days since the 55th annual Super Bowl Amercan football game and, for those that watched it, your Super Bowl snacks should have digested, it's now time to digest, clean and plot some Super Bowl data.This question looks at a data set about the Super Bowl data set at "data.world." It should not be necessary to be familiar with American football to carry out the procedures requested here but feel free to ask if you have any questions. In any case, here's a [link to an overview of the data set](https://data.world/sports/history-of-the-super-bowl).  You should **not** need to register to view the description or access the data (even though it may appear *data.world* wants you to do so). The raw data, a comma-separated data file (CSV),  can be accessed from this link "https://query.data.world/s/zg4dna5wbbnonds7ewdv7pznh7ou7p". This is the link you should use to read in the data in your analysis.^[Sorry, this dataset ends with Super Bowl LII.]
+With Super Bowl LVII coming up this Sunday with its associated Americana, Super Bowl snacks and commercials, it's now time to digest, clean and plot some Super Bowl data.This question looks at a data set about the Super Bowl obtained from "data.world." It should not be necessary to be familiar with American football to carry out the procedures requested here but feel free to ask if you have any questions. In any case, here's a [link to an overview of the data set](https://data.world/sports/history-of-the-super-bowl). Unfortunately, this data set has not been updated since Super Bowl LII  in 2018.
 
-a. The **tidyverse** packages have been loaded in the chunk above so you can go ahead and read in the data. Write a code chunk below that uses `read_csv()` to read in the data from the URL provided. Read it into a data frame called **super_bowl**. Since you are using `read_csv()`, this data frame will be a tibble.
+a. The **tidyverse** packages have been loaded in the chunk above so you can go ahead and read in the data. Write a code chunk below that uses `read_csv()` to read in the `Super_Bowl.csv` data from the data folder of your project into a data frame called **super_bowl**. Since you are using `read_csv()`, this data frame will be a tibble.
 
 **Answer:**
 
@@ -37,7 +37,7 @@ a. The **tidyverse** packages have been loaded in the chunk above so you can go 
 
 
 
-b. You should have seen some red print in the outpu confirming the column specifications the package **readr** used to import the data. Follow directions and use the `spec(...)` command to see the full columnn specifications used to read the data. This output is somewhat lengthy but it clearly shows the formats used as well as indicating which names are "non-syntactic".
+b. You should have seen some red print in the output confirming the column specifications the package **readr** used to import the data. Follow directions and use the `spec(...)` command to see the full column specifications used to read the data. This output is somewhat lengthy but it clearly shows the formats used as well as indicating which names are "non-syntactic".
 
 **Answer:**
 
@@ -58,7 +58,7 @@ d. Let's first fix up the non-syntactic names. A handy package for this purpose 
 
 ```
 
-e. Now consider the first column of the data frame. It should be clear to you that this is a *date* but, by default, **readr** imports it as a character string. Use `mutate()` and the `parse_date()` function to cast the variable as a variable of type "date". Hint: You'll need to provide a format specification for the date. See Section 11.3.4 for help with this. Resave the revised data under the name **super_bowl**.
+e. Now consider the first column of the data frame. It should be clear to you that this is a *date* but, by default, **readr** imports it as a character string. Use `mutate()` and the `parse_date()` function to cast the variable as a variable of type "date". Hint: You'll need to provide a format specification for the date. See Section 11.3.4 of the R4DS text for help with this. Re-save the revised data under the name **super_bowl**.
 
 **Answer:**  
 
@@ -66,7 +66,7 @@ e. Now consider the first column of the data frame. It should be clear to you th
 
 ```
 
-f. The next column contains the variable *sb* indicating a sequence number in Roman numerals representing the Super Bowl in marketing and promotion. Use appropriate functions with `mutate()` to convert this variable to a numeric variable *sb* ranging from 1 to 53. This will be a good chance to learn about the functions `as.roman()` and `as.numeric()`. 
+f. The next column contains the variable *sb* indicating a sequence number in Roman numerals representing the Super Bowl in marketing and promotion. Use appropriate functions with `mutate()` to convert this variable to a numeric variable *sb* ranging from 1 to 52. This will be a good chance to learn about the functions `as.roman()` and `as.numeric()`. 
 
 **Answer:**  
 
@@ -74,7 +74,7 @@ f. The next column contains the variable *sb* indicating a sequence number in Ro
 
 ```
 
-g. Now take a break for a picture. Use **ggplot2** to create a line plot showing *attendance* (y) against the superbowl number (*sb*) on the (x) axis. On top of this lineplot, superimpose a point plot (geom_point()) that colors the points by whether or not the game took place in the "Rose Bowl" `stadium`. What do you notice? Which game now sticks out as out of place? In what stadium was it played? To finish the story, find out in what year the stadium opened.   
+g. Now take a break for a picture. Use **ggplot2** to create a line plot showing *attendance* (y) against the super bowl number (*sb*) on the (x) axis. On top of this line plot, superimpose a point plot (`geom_point()`) that colors the points by whether or not the game took place in the "Rose Bowl" `stadium`. What do you notice? Which game now sticks out as out of place? In what stadium was it played? To finish the story, find out in what year the stadium opened.   
 
 **Answer:**  
 
@@ -146,7 +146,7 @@ e. Use an appropriate function from the Data Transformation Cheat Sheet to draw 
 
 # Question 3: British Baking Data Set  
 
-The *Great British Bake Off* is a very popular long-running British baking competition TV program that has now been running for 9 seasons, airing first in the UK and later gaining popularity in the US. Viewership ratings data and other information about the program are provided in the data set "gbbo_ratings.csv" found in the `data` subdirectory of your workspace. 
+The *Great British Bake Off* is a very popular long-running British baking competition TV program that has run for more than 10 seasons, airing first in the UK and later gaining popularity in the US. Viewership ratings data and other information about the program are provided in the data set "gbbo_ratings.csv" found in the `data` subdirectory of your workspace. 
 
 a. Use data tidying commands to tidy the data into a form that will allow you to construct a plot of 7-day viewership numbers (variables that end with "7day") against the episode number. Note that the variable name "e1_viewers_7day" provides information on the 7day viewership (millions who watched within 7 days of airing) of the 1st episode of the season. Use parsing commands rather than brute force wherever possible. Your plot should have the following characteristics:   
 
